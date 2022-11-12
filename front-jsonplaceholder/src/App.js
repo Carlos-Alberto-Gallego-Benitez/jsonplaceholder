@@ -1,6 +1,8 @@
-import './style/App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Fragment } from "react";
+import './style/App.css';
+import './style/styles.css'
+import Loyout from "./components/view/Loyout";
 
 function App() {
   return (
@@ -9,10 +11,18 @@ function App() {
         <Route
           path={`/`} element={
             <Fragment>
-              holas
+              <Loyout path='home' />
             </Fragment>
           }
         />
+        <Route
+          path={`/users`} element={
+            <Fragment>
+              <Loyout path={'users'} />
+            </Fragment>
+          }
+        />
+
       </Routes>
     </BrowserRouter>
   );
