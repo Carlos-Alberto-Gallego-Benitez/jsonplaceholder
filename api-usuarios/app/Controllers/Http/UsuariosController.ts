@@ -6,9 +6,9 @@ import axios from 'axios'
 import Env from '@ioc:Adonis/Core/Env'
 
 const database =   Database.connection('mysql');
-const path_base = Env.get('RUTA_PUBLICACIONES');
+const path_base = Env.get('RUTA_USUARIOS');
 
-export default class PublicacionesController {
+export default class UsuariosController {
 
     public async test({response}: HttpContextContract){
         const report = await HealthCheck.getReport()
@@ -27,7 +27,5 @@ export default class PublicacionesController {
             response.json(error)
           }
     }
-
-
 
 }
