@@ -1,11 +1,15 @@
 ### create app api-publicaciones
 
-##actualizar paquetes
-##paso 1
+## puerto: 8341
+
+## actualizar paquetes
+
+## paso 1
 
 ### `npm i ` o `npm isntall`
 
-##encender api api-publicaciones
-##paso 2
+## encender api api-publicaciones
+
+## paso 2
 
 ## `npm run dev`
