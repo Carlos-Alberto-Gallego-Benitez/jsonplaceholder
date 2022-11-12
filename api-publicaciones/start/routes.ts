@@ -1,5 +1,7 @@
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async () => {
-  return { hello: 'world' }
-})
+Route.group(() => {
+  Route.get('/test', 'PublicacionesController.test')
+  Route.get('/index', 'PublicacionesController.index')
+
+}).prefix('/api-publicaciones')
