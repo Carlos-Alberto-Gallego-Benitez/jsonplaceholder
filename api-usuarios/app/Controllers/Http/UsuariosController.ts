@@ -20,7 +20,6 @@ export default class UsuariosController {
 
     //listado de usuarios
     public async index({response}: HttpContextContract){
-        response.json({path_base})
         try {
             const { data } = await axios.get(
                 path_base + `users`, { headers: { token: ''} }
@@ -32,10 +31,24 @@ export default class UsuariosController {
             throw error
           }
     }
+
+       //listado de usuarios filtrado
+       public async searchUser({response, request}: HttpContextContract){
+        let { id } = request.all();
+        try {
+            const { data } = await axios.get(
+                path_base + `users/${id}`, { headers: { token: ''} }
+            );
+            controlResponserutas(base64.encode(JSON.stringify(data)))
+            response.json(data);
+          } catch (error) {
+            controlResponserutas(base64.encode(JSON.stringify(error)))
+            throw error
+          }
+    }
     
     //listado de albums
     public async albums({response}: HttpContextContract){
-        response.json({path_base})
         try {
             const { data } = await axios.get(
                 path_base + `albums`, { headers: { token: ''} }

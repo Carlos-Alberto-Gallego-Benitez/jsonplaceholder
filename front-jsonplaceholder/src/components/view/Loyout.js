@@ -7,11 +7,32 @@ import Load from "../common/Load"
 import { useState } from 'react'
 import Peticiones from "./peticiones/Peticiones";
 import Fotos from "./usuario/Fotos";
+import Search from "./search/Search";
+import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 
 export default function Loyout({ path }) {
 
+    //navegador router
+    const navigate = useNavigate();
+
     const [load, setLoad] = useState(false)
+    const [searchG, setSearchG] = useState(0)
+
+    const buscarUser = (e) => {
+        console.log(searchG)
+        if (searchG) {
+            if (searchG !== null && searchG !== '' && searchG !== undefined) {
+                navigate(`/search/${searchG}`)
+            }
+        } else {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Ingrese un valor',
+            })
+        }
+    }
 
     return (
         <>
@@ -21,9 +42,9 @@ export default function Loyout({ path }) {
                 <button className="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="##"><i className="fas fa-bars"></i></button>
                 <form className="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                     <div className="input-group">
-                        <input className="form-control" type="text" placeholder="ingrese id de usuario" aria-label="Search" aria-describedby="basic-addon2" />
+                        <input type='number' className="form-control" onChange={(e) => { setSearchG(e.target.value) }} placeholder="ingrese id de usuario" aria-label="Search" aria-describedby="basic-addon2" />
                         <div className="input-group-append">
-                            <button className="btn btn-primary" type="button"><i className="fas fa-search"></i></button>
+                            <button className="btn btn-primary" onClick={(e) => { buscarUser() }} type="button"><i className="fas fa-search" ></i></button>
                         </div>
                     </div>
                 </form>
@@ -76,6 +97,7 @@ export default function Loyout({ path }) {
                 {path === 'publicaciones' ? <Publicaciones setLoad={setLoad} /> : ''}
                 {path === 'peticiones' ? <Peticiones setLoad={setLoad} /> : ''}
                 {path === 'fotos' ? <Fotos setLoad={setLoad} /> : ''}
+                {path === 'search' ? <Search setLoad={setLoad} /> : ''}
             </div>
             <Footer />
         </>

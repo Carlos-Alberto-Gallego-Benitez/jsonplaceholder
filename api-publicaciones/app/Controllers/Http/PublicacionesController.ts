@@ -20,7 +20,6 @@ export default class PublicacionesController {
 
     //listdo de publicaciones
     public async index({response}: HttpContextContract){
-        response.json({path_base})
         try {
             const { data } = await axios.get(
                 path_base + `posts`, { headers: { token: ''} }

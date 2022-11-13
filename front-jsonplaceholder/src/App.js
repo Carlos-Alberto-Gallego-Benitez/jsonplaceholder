@@ -46,6 +46,14 @@ function App() {
           }
         />
 
+        <Route
+          path={`/search/:id`} element={
+            <Fragment>
+              <Loyout path={'search'} />
+            </Fragment>
+          }
+        />
+
       </Routes>
     </BrowserRouter>
   );
