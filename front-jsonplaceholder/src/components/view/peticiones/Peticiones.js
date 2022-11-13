@@ -3,14 +3,14 @@ import Barratitulos from '../informativo/Barratitulos'
 import { useEffect, useState } from 'react'
 import select from '../../../service/select'
 
-export default function Usuario() {
+export default function Peticiones() {
 
-    const [users, setUsers] = useState([])
+    const [peticiones, setPeticiones] = useState([])
 
     useEffect(() => {
         async function aux() {
-            let { data } = await select('index', 1);
-            setUsers(data)
+            let { data } = await select('index', 3);
+            setPeticiones(data)
             setTimeout(() => {
                 window.dataTable()
             }, 300)
@@ -18,9 +18,9 @@ export default function Usuario() {
         aux()
     }, [])
 
-
     return (
         <>
+
             <Container fluid={true} className='mt-5'>
                 <Barratitulos titulo={'Gestión de usuarios'} />
                 <div className="card mb-4">
@@ -55,7 +55,7 @@ export default function Usuario() {
                                 </tfoot>
                                 <tbody>
                                     {
-                                        users && users.length > 0 ? users.map((e) => {
+                                        peticiones && peticiones.length > 0 ? peticiones.map((e) => {
                                             return (
                                                 <>
                                                     <tr>

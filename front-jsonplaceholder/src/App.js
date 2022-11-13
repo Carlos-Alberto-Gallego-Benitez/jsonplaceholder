@@ -22,6 +22,13 @@ function App() {
             </Fragment>
           }
         />
+        <Route
+          path={`/publicaciones`} element={
+            <Fragment>
+              <Loyout path={'publicaciones'} />
+            </Fragment>
+          }
+        />
 
       </Routes>
     </BrowserRouter>

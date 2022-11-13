@@ -1,18 +1,18 @@
 import axios from "axios";
 
-async function select(action, page) {
-  let token = window.parent.consultarToken();
-  const RUTA_API = `${process.env.REACT_APP_URL_API_POT}`;
-  const RUTA_API = `${process.env.REACT_APP_URL_API_POT}`;
-  const RUTA_API = `${process.env.REACT_APP_URL_API_POT}`;
+let RUTA_API = null;
 
+async function select(action, api) {
+
+  if (api === 1) { RUTA_API = `${process.env.REACT_APP_URL_API_USUARIOS}` }
+  if (api === 2) { RUTA_API = `${process.env.REACT_APP_URL_API_PUBLICACIONES}` }
+  if (api === 3) { RUTA_API = `${process.env.REACT_APP_URL_API_TRANSACCIONES}` }
   try {
     const { data } = await axios.get(
-      RUTA_API + action, { headers: { token: token, page, limit: 10 } }
+      RUTA_API + action
     );
     return { data };
   } catch (error) {
-    window.parent.msgAdvertencia("Error: " + error.message);
     throw error
   }
 }

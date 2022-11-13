@@ -1,16 +1,22 @@
+
 import { Container } from 'react-bootstrap'
 import Barratitulos from '../informativo/Barratitulos'
 import { useEffect, useState } from 'react'
 import select from '../../../service/select'
 
-export default function Usuario() {
+export default function Publicaciones() {
 
+    const [publicaciones, setPublicaciones] = useState([])
     const [users, setUsers] = useState([])
 
+    //carga inicial de la grid
     useEffect(() => {
         async function aux() {
-            let { data } = await select('index', 1);
-            setUsers(data)
+            //peticiones para cargar los valores de las grid
+            let { data } = await select('index', 2);
+            let usr = await select('index', 1);
+            setUsers(usr.data)
+            setPublicaciones(data)
             setTimeout(() => {
                 window.dataTable()
             }, 300)
@@ -21,7 +27,7 @@ export default function Usuario() {
 
     return (
         <>
-            <Container fluid={true} className='mt-5'>
+            <Container fluid={true} className='mt-5 font-main'>
                 <Barratitulos titulo={'Gestión de usuarios'} />
                 <div className="card mb-4">
                     <div className="card-header">
@@ -33,39 +39,30 @@ export default function Usuario() {
                             <table className="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>Nombre</th>
+                                        <th>Título</th>
                                         <th>Identificador</th>
-                                        <th>Correo</th>
-                                        <th>Dirección</th>
-                                        <th>Teléfono</th>
-                                        <th>Sitio Web</th>
-                                        <th>Empresa</th>
+                                        <th>Usuario</th>
+                                        <th>Cuerpo del post</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Nombre</th>
+                                        <th>Título</th>
                                         <th>Identificador</th>
-                                        <th>Correo</th>
-                                        <th>Dirección</th>
-                                        <th>Teléfono</th>
-                                        <th>Sitio Web</th>
-                                        <th>Empresa</th>
+                                        <th>Usuario</th>
+                                        <th>Cuerpo del post</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
                                     {
-                                        users && users.length > 0 ? users.map((e) => {
+                                        publicaciones && publicaciones.length > 0 ? publicaciones.map((e) => {
                                             return (
                                                 <>
                                                     <tr>
-                                                        <td>{e.name}</td>
-                                                        <td>{e.username}</td>
-                                                        <td>{e.email}</td>
-                                                        <td>{e.address.city + ' ' + e.address.street}</td>
-                                                        <td>{e.phone}</td>
-                                                        <td>{e.website}</td>
-                                                        <td>{e.company.name}</td>
+                                                        <td>{e.title}</td>
+                                                        <td>{e.id}</td>
+                                                        <td>{users.find(obj => obj.id === e.userId).name}</td>
+                                                        <td>{e.body}</td>
                                                     </tr>
                                                 </>
                                             )

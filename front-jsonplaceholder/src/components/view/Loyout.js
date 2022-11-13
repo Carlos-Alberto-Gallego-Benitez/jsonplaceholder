@@ -1,12 +1,14 @@
 import Home from "./home/Home"
 import Footer from "./footer/Footer"
 import Usuario from "./usuario/Usuario"
+import { NavLink } from "react-router-dom";
+import Publicaciones from "./publicaciones/Publicaciones"
 
 
 export default function Loyout({ path }) {
     return (
         <>
-            <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark font-main">
                 <a className="navbar-brand" href="index.html">Social network</a>
                 <button className="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="##"><i className="fas fa-bars"></i></button>
                 <form className="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -26,25 +28,25 @@ export default function Loyout({ path }) {
                     </li>
                 </ul>
             </nav>
-            <div id="layoutSidenav">
+            <div id="layoutSidenav" className="font-main">
                 <div id="layoutSidenav_nav">
                     <nav className="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                         <div className="sb-sidenav-menu">
                             <div className="nav">
                                 <div className="sb-sidenav-menu-heading">Dashboard</div>
-                                <a className="nav-link" href="jsonplaceholder">
+                                <NavLink className="nav-link" to="/">
                                     <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                                     Inicio
-                                </a>
+                                </NavLink>
                                 <div className="sb-sidenav-menu-heading">Usuario</div>
-                                <a className="nav-link collapsed" href="users" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <NavLink className="nav-link collapsed" to="/users" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
                                     Listar Usuarios
-                                </a>
-                                <a className="nav-link collapsed" href="##" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                </NavLink>
+                                <NavLink className="nav-link collapsed" to="/publicaciones" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                     <div className="sb-nav-link-icon"><i className="fas fa-book-open"></i></div>
                                     Listar Publicaciones
-                                </a>
+                                </NavLink>
 
                                 <div className="sb-sidenav-menu-heading">Peticiones</div>
                                 <a className="nav-link" href="charts.html">
@@ -59,6 +61,7 @@ export default function Loyout({ path }) {
                 {/*contenido de la pagina*/}
                 {path === 'home' ? <Home /> : ''}
                 {path === 'users' ? <Usuario /> : ''}
+                {path === 'publicaciones' ? <Publicaciones /> : ''}
             </div>
             <Footer />
         </>

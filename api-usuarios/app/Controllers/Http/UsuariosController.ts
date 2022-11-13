@@ -19,7 +19,7 @@ export default class UsuariosController {
         response.json({path_base})
         try {
             const { data } = await axios.get(
-                path_base + `posts`, { headers: { token: ''} }
+                path_base + `users`, { headers: { token: ''} }
             );
             response.json(data);
           } catch (error) {
