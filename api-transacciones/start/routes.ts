@@ -16,4 +16,5 @@ Route.group(() => {
   Route.get('/test', 'TransaccionesController.test')
   Route.get('/index', 'TransaccionesController.index')
   Route.put('/update', 'TransaccionesController.update')
+  Route.put('/delete', 'TransaccionesController.delete')
 }).prefix('/api-transacciones').middleware('LogRequest')

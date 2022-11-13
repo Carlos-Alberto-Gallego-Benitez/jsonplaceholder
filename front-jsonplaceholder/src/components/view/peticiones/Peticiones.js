@@ -6,8 +6,13 @@ import IconButton from '../../common/IconButton'
 import encode64 from '../../../helpers/encode64'
 import exportDatos from '../../../service/exportDatos'
 import update from "../../../service/update"
+import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 export default function Peticiones({ setLoad }) {
+
+    //navegador de rutas de react router
+    const navigate = useNavigate();
 
     //estados modal
     const [show, setShow] = useState(false);
@@ -15,6 +20,8 @@ export default function Peticiones({ setLoad }) {
     const handleShow = () => setShow(true);
 
     const [peticiones, setPeticiones] = useState([])
+
+    const [render, setRender] = useState(0);
 
     const [elementConsulta, setElementConsulta] = useState({
         nombre: '',
@@ -30,8 +37,7 @@ export default function Peticiones({ setLoad }) {
     useEffect(() => {
         async function aux() {
             setLoad(true)
-            let { data } = await select('index', 3);
-            setPeticiones(data[0])
+            await listPeticiones()
             setTimeout(() => {
                 window.dataTable()
             }, 300)
@@ -39,6 +45,16 @@ export default function Peticiones({ setLoad }) {
         }
         aux()
     }, [])
+
+    useEffect(() => {
+
+    }, [peticiones])
+
+    //listado de peticiones
+    const listPeticiones = async () => {
+        let { data } = await select('index', 3);
+        setPeticiones(data[0])
+    }
 
     //repote de excel
     const expoDatos = () => {
@@ -105,7 +121,28 @@ export default function Peticiones({ setLoad }) {
     //función para guardar la petición a editar o editada
     const guardar = async () => {
         let rspUpdate = await update(`update?query=${encode64(JSON.stringify(elementConsulta))}`, 3);
-        console.log(rspUpdate)
+        if (rspUpdate === 'Ok') {
+            setLoad(true)
+            handleClose()
+            await listPeticiones()
+            setLoad(false)
+            navigate("/peticiones")
+        }
+    }
+
+    const eliminar = async () => {
+        Swal.fire({
+            title: 'Estás seguro de eliminar este registro?',
+            showDenyButton: true,
+            confirmButtonText: 'Si',
+            denyButtonText: `No`,
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                await update(`delete?query=${encode64(JSON.stringify(elementConsulta))}`, 3)
+                //wal.fire('Registro eliminado con éxito', '', 'success')
+            } else if (result.isDenied) {
+            }
+        })
     }
 
     return (
@@ -157,7 +194,7 @@ export default function Peticiones({ setLoad }) {
                                                         <td className='flx'><IconButton title='Editar Petición' onClick={() => {
                                                             editar(e.id)
                                                             handleShow()
-                                                        }} className='icon-editar' /><IconButton className='icon-eliminar' title='Eliminar Petición' /></td>
+                                                        }} className='icon-editar' /><IconButton className='icon-eliminar' title='Eliminar Petición' onClick={() => { eliminar() }} /></td>
                                                     </tr>
                                                 </>
                                             )
@@ -262,7 +299,6 @@ export default function Peticiones({ setLoad }) {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" className='btn-principales' onClick={() => {
-                        handleClose()
                         guardar()
                     }}>
                         Guardar Cambios

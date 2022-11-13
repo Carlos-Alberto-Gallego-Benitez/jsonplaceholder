@@ -13,9 +13,12 @@ async function update(action, api) {
     const { data } = await axios.put(
       RUTA_API + action,
     );
-    if (data === "Dato editado exitosamente") {
-      window.parent.msgInformacion(data.message);
-      return "ok";
+    if (data === "Ok") {
+      Swal.fire({
+        icon: 'success',
+        title: 'Registro actualizado con éxito',
+      })
+      return "Ok";
     } else {
       Swal.fire({
         icon: 'error',
