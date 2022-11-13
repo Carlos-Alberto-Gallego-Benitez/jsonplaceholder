@@ -3,11 +3,19 @@ import Footer from "./footer/Footer"
 import Usuario from "./usuario/Usuario"
 import { NavLink } from "react-router-dom";
 import Publicaciones from "./publicaciones/Publicaciones"
+import Load from "../common/Load"
+import { useState } from 'react'
+import Peticiones from "./peticiones/Peticiones";
+import Fotos from "./usuario/Fotos";
 
 
 export default function Loyout({ path }) {
+
+    const [load, setLoad] = useState(false)
+
     return (
         <>
+            <Load visible={load} />
             <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark font-main">
                 <a className="navbar-brand" href="index.html">Social network</a>
                 <button className="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="##"><i className="fas fa-bars"></i></button>
@@ -47,21 +55,27 @@ export default function Loyout({ path }) {
                                     <div className="sb-nav-link-icon"><i className="fas fa-book-open"></i></div>
                                     Listar Publicaciones
                                 </NavLink>
+                                <NavLink className="nav-link collapsed" to="/fotos" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                    <div className="sb-nav-link-icon"><i className="fas fa-book-open"></i></div>
+                                    Fotos
+                                </NavLink>
 
                                 <div className="sb-sidenav-menu-heading">Peticiones</div>
-                                <a className="nav-link" href="charts.html">
+                                <NavLink className="nav-link" to="/peticiones">
                                     <div className="sb-nav-link-icon"><i className="fas fa-chart-area"></i></div>
                                     Listar Peticiones
-                                </a>
+                                </NavLink>
 
                             </div>
                         </div>
                     </nav>
                 </div>
                 {/*contenido de la pagina*/}
-                {path === 'home' ? <Home /> : ''}
-                {path === 'users' ? <Usuario /> : ''}
-                {path === 'publicaciones' ? <Publicaciones /> : ''}
+                {path === 'home' ? <Home setLoad={setLoad} /> : ''}
+                {path === 'users' ? <Usuario setLoad={setLoad} /> : ''}
+                {path === 'publicaciones' ? <Publicaciones setLoad={setLoad} /> : ''}
+                {path === 'peticiones' ? <Peticiones setLoad={setLoad} /> : ''}
+                {path === 'fotos' ? <Fotos setLoad={setLoad} /> : ''}
             </div>
             <Footer />
         </>

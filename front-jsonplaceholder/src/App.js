@@ -30,6 +30,22 @@ function App() {
           }
         />
 
+        <Route
+          path={`/peticiones`} element={
+            <Fragment>
+              <Loyout path={'peticiones'} />
+            </Fragment>
+          }
+        />
+
+        <Route
+          path={`/fotos`} element={
+            <Fragment>
+              <Loyout path={'fotos'} />
+            </Fragment>
+          }
+        />
+
       </Routes>
     </BrowserRouter>
   );

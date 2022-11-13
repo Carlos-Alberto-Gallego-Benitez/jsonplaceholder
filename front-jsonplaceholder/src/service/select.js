@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from 'sweetalert2'
 
 let RUTA_API = null;
 
@@ -13,6 +14,11 @@ async function select(action, api) {
     );
     return { data };
   } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Ocurrió un error',
+      text: error.message.toStrig()
+    })
     throw error
   }
 }

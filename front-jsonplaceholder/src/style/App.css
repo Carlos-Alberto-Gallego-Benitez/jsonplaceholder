@@ -69,3 +69,148 @@ padding: 0;
   opacity: 0.8;
 }
 
+.tamano-imagen{
+  height: 120px;
+  width: 314px;
+}
+
+.excel{
+  background-image: url('../icons/excel2.png');
+  width: 45px !important;
+  height: 45px !important;
+}
+
+.btn-icon {
+  background-color: transparent;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  height: 25px;
+  outline: none;
+  width: 18px;
+}
+
+.btn-icon:focus{
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.flex-excel{
+  display: flex;
+  justify-content: flex-end;
+}
+
+/*Scrol estilos */
+/* ::-webkit-scrollbar-thumb {
+  background-color: rgba(124, 124, 124, 0.47);
+  border-radius: 20px;
+}
+::-webkit-scrollbar {
+  width: 8px;
+} */
+
+
+.icon-editar{
+  background-image: url('../icons/EDITAR.svg');
+}
+
+.icon-eliminar{
+  background-image: url('../icons/ELIMINAR.svg');
+}
+.flx{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+div div div div  .btn-principales{
+  align-items: center;
+  background-color: #212529;
+  border: none;
+  border-radius: 15px;
+  display: flex;
+  font-family: 'WorkSans-Normal';
+  font-size: 12px;
+  justify-content: center;
+  text-align: center;
+  height: 29px;
+  width: 156px;
+}
+
+div div div div  .btn-principales:focus{
+box-shadow: none !important;
+outline: none !important;
+}
+
+div div div div  .modal-title.h4 {
+  font-size: 18px;
+  display: flex;
+  margin: auto;
+  color: #212529;
+  font-weight: bold;
+  text-transform: capitalize;
+  font-family: 'WorkSans-Normal';
+}
+
+button.btn-close, button.btn-close:focus {
+  margin: 0px;
+  display: flex;
+  outline: none;
+  box-shadow: none;
+  height: 15px;
+  width: 15px;
+  line-height: 15px;
+  background-size: 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 2px;
+}
+
+div div div div .titilos-modal {
+  color: var(--main-color);
+  display: flex;
+  font-size: 14px;
+  font-weight: 700;
+  margin: auto;
+  text-transform: capitalize;
+}
+
+div div div div .icon-cerrar-modal {
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: 10px;
+  box-shadow: none;
+  display: flex;
+  height: 15px;
+  line-height: 15px;
+  margin: 0;
+  outline: none;
+  padding: 2px;
+  width: 15px;
+  box-shadow: none !important;
+}
+
+.icon-cancel {
+  background-image: url("../icons/Cerrar.svg");
+  width: 12px;
+}
+
+.btn-close{
+  display: none !important;
+}
+
+div div div div  .lbl {
+  font-size: 12px;
+  display: flex;
+  margin: auto;
+  color: #212529;
+  font-weight: bold;
+  text-transform: capitalize;
+  font-family: 'WorkSans-Normal';
+}
