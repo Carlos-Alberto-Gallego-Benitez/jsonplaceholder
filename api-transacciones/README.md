@@ -13,3 +13,7 @@
 ## paso 2
 
 ## `npm run dev`
+
+## ruta de salida
+
+## `http://127.0.0.1:8342/api-transacciones/`

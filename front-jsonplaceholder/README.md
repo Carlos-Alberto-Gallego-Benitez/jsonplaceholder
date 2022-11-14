@@ -9,3 +9,7 @@
 ##paso 2
 
 ## `npm start`
+
+## Ruta de salida
+
+## `http://localhost:8340/jsonplaceholder/login`
