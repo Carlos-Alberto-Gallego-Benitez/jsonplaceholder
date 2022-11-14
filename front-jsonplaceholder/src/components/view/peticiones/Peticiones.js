@@ -139,7 +139,7 @@ export default function Peticiones({ setLoad }) {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 await update(`delete?query=${encode64(JSON.stringify(elementConsulta))}`, 3)
-                //wal.fire('Registro eliminado con éxito', '', 'success')
+                await listPeticiones()
             } else if (result.isDenied) {
             }
         })

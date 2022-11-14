@@ -29,7 +29,7 @@ export default function Search({ setLoad }) {
             setLoad(false)
         }
         aux()
-    }, [])
+    }, [id])
 
 
     //exportar datos a excel

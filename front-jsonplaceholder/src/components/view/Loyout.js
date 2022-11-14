@@ -10,9 +10,15 @@ import Fotos from "./usuario/Fotos";
 import Search from "./search/Search";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
+import decode64 from "../../helpers/decode64";
 
 
 export default function Loyout({ path }) {
+
+    let parseSession;
+    if (localStorage.getItem("sessions_social_network")) {
+        parseSession = JSON.parse(decode64(localStorage.getItem("sessions_social_network")));
+    }
 
     //navegador router
     const navigate = useNavigate();
@@ -20,6 +26,7 @@ export default function Loyout({ path }) {
     const [load, setLoad] = useState(false)
     const [searchG, setSearchG] = useState(0)
 
+    //función para buscar usuarios
     const buscarUser = (e) => {
         console.log(searchG)
         if (searchG) {
@@ -32,6 +39,12 @@ export default function Loyout({ path }) {
                 title: 'Ingrese un valor',
             })
         }
+    }
+
+    //función para cerrar sesión
+    const closeSessions = () => {
+        localStorage.removeItem('sessions_social_network');
+        window.location.href = 'http://localhost:8340/jsonplaceholder/login'
     }
 
     return (
@@ -49,11 +62,12 @@ export default function Loyout({ path }) {
                     </div>
                 </form>
                 <ul className="navbar-nav ml-auto ml-md-0">
-                    <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" id="userDropdown" href="##" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="fas fa-user fa-fw"></i></a>
-                        <div className="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a className="dropdown-item" href="login.html">Logout</a>
-                        </div>
+                    <li className="nav-item dropdown flx-user-opions">
+                        <a className="user-naame" id="userDropdown" href="##" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >{parseSession ? parseSession.user : ''}</a>
+                        {parseSession ? <a className="nav-link dropdown-toggle" id="userDropdown" href="##" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="fas fa-user fa-fw"></i></a> : ''}
+                        {parseSession ? <div className="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                            <a className="dropdown-item" href="##" onClick={() => { closeSessions() }}>Cerrar Sesión</a>
+                        </div> : ''}
                     </li>
                 </ul>
             </nav>

@@ -21,8 +21,8 @@ async function select(action, api) {
     return { data };
   } catch (error) {
     Swal.fire({
-      icon: 'error',
-      title: 'Ocurrió un error',
+      icon: 'warning',
+      title: 'Acceso denegado',
       text: error.response ? error.response.statusText : error.message
     })
     if (error.response) {

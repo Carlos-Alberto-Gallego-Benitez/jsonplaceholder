@@ -214,3 +214,18 @@ div div div div  .lbl {
   text-transform: capitalize;
   font-family: 'WorkSans-Normal';
 }
+
+.user-naame:hover{
+  text-decoration: none;
+  color: #007bff;
+}
+
+.user-naame{
+  text-decoration: none;
+  color: white;
+}
+
+.flx-user-opions{
+  display: flex;
+  align-items: center;
+}
