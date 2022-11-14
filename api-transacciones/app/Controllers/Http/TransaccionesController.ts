@@ -36,7 +36,7 @@ export default class TransaccionesController {
         query = JSON.parse(base64.decode(query));
         try {
             let sql = `UPDATE jsonplaceholder.transacciones SET url='${query.url}', nombre='${query.nombre}', fecha='${query.fecha}', metodo='${query.metodo}', respuesta_api='${query.respuesta}', catch_respuesta='${query.catch}' WHERE id = ${parseInt(query.id)}`;
-            const controlCambios = await database.rawQuery(sql);
+            await database.rawQuery(sql);
             controlResponserutas(base64.encode(JSON.stringify({data: 'Ok'})))
             response.json('Ok')
         } catch (error) {
@@ -51,7 +51,7 @@ export default class TransaccionesController {
         query = JSON.parse(base64.decode(query));
         try {
             let sql = `DELETE FROM jsonplaceholder.transacciones WHERE id = ${parseInt(query.id)}`
-            const controlCambios = await database.rawQuery(sql);
+            await database.rawQuery(sql);
             controlResponserutas(base64.encode(JSON.stringify({data: 'Ok'})))
             response.json('Ok')
         } catch (error) {

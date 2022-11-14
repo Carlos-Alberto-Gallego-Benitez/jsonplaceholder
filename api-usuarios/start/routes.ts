@@ -18,6 +18,6 @@ Route.group(() => {
   Route.get('/albums', 'UsuariosController.albums')
   Route.get('/photos', 'UsuariosController.photos')
   Route.get('/searchUser', 'UsuariosController.searchUser')
-  Route.get('/gerateToken', 'UsuariosController.gerateToken')
+  Route.get('/login', 'UsuariosController.login')
   Route.get('/verify', 'UsuariosController.verify')
 }).prefix('/api-usuarios').middleware('LogRequest')

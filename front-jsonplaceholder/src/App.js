@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import './style/App.css';
 import './style/styles.css'
 import Loyout from "./components/view/Loyout";
+import Login from "./components/view/login/Login";
 
 function App() {
   return (
@@ -50,6 +51,14 @@ function App() {
           path={`/search/:id`} element={
             <Fragment>
               <Loyout path={'search'} />
+            </Fragment>
+          }
+        />
+
+        <Route
+          path={`/login`} element={
+            <Fragment>
+              <Login />
             </Fragment>
           }
         />

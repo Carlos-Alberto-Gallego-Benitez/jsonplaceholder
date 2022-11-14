@@ -28,6 +28,7 @@ export default class UsuariosController {
             );
             controlResponserutas(base64.encode(JSON.stringify(data)))
             response.json(data);
+            return data
           } catch (error) {
             controlResponserutas(base64.encode(JSON.stringify(error)))
             throw error
@@ -78,22 +79,39 @@ export default class UsuariosController {
           }
     }
 
-    public async gerateToken({response}: HttpContextContract){
+    public async login({response, request}: HttpContextContract){
+      //entrada con los datos del usuario a loguear
+      let { query } = request.all();
+      query = JSON.parse(base64.decode(query));
       let salida;
-      var privateKey = readFileSync('./private.key');
-      var token = sign({ data: 'bar', exp: Math.floor(Date.now() / 1000) + (15 * 15) }, privateKey, { algorithm: 'RS256'});
-      var publicKey = readFileSync('./public.key');  // get public key
-      verify(token, publicKey, { algorithms: ['RS256']}, (err, decoded) => {
-        salida = {decod: decoded, token: token}
-      });
-      controlResponserutas(base64.encode(JSON.stringify({data: 'ok'})))
-      response.json(salida)
+      let sql = `SELECT password FROM jsonplaceholder.usuario WHERE correo = '${query.user}' `;
+      const password = await database.rawQuery(sql);
+      let i = password[0]
+      let y = i[0];
+
+      if(base64.decode(y.password) === query.passw){
+        //clave de jwt para encriptar los datos del usuario
+        var privateKey = readFileSync('./private.key');
+        var token = sign({ data: {user: query.user, passw: y.password}, exp: Math.floor(Date.now() / 1000) + (25 * 25) }, privateKey, { algorithm: 'RS256'});
+        salida = {token: token, user: query.user}
+        controlResponserutas(base64.encode(JSON.stringify({data: 'logued success', tokenLogued: token})))
+        response.json(salida)
+        return 
+      }else{
+        controlResponserutas(base64.encode(JSON.stringify({data: 'logued faild', tokenLogued: 'faild'})))
+        response.json(0)
+        return 0
+      }
+
+      
     }
 
+
+    //verificar jwt
     public async verify({response, request}: HttpContextContract){
       let salida;
       let { token } = request.all();
-      var privateKey = readFileSync('./private.key');
+      //var privateKey = readFileSync('./private.key');
      // var token = sign({ data: 'bar', exp: Math.floor(Date.now() / 1000) + (15 * 15) }, privateKey, { algorithm: 'RS256'});
       var publicKey = readFileSync('./public.key');  // get public key
       verify(token, publicKey, { algorithms: ['RS256']}, (err, decoded) => {
