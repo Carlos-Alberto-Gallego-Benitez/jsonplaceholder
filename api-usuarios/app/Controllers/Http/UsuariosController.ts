@@ -5,6 +5,8 @@ import HealthCheck from '@ioc:Adonis/Core/HealthCheck'
 import axios from 'axios'
 import Env from '@ioc:Adonis/Core/Env'
 import { controlResponserutas } from 'App/services/controlResponserutas'
+import { verify, sign } from 'jsonwebtoken'
+import { readFileSync } from 'fs'
 
 const database =   Database.connection('mysql');
 const path_base = Env.get('RUTA_USUARIOS');
@@ -74,6 +76,31 @@ export default class UsuariosController {
             controlResponserutas(JSON.stringify(error))
             throw error
           }
+    }
+
+    public async gerateToken({response}: HttpContextContract){
+      let salida;
+      var privateKey = readFileSync('./private.key');
+      var token = sign({ data: 'bar', exp: Math.floor(Date.now() / 1000) + (15 * 15) }, privateKey, { algorithm: 'RS256'});
+      var publicKey = readFileSync('./public.key');  // get public key
+      verify(token, publicKey, { algorithms: ['RS256']}, (err, decoded) => {
+        salida = {decod: decoded, token: token}
+      });
+      controlResponserutas(base64.encode(JSON.stringify({data: 'ok'})))
+      response.json(salida)
+    }
+
+    public async verify({response, request}: HttpContextContract){
+      let salida;
+      let { token } = request.all();
+      var privateKey = readFileSync('./private.key');
+     // var token = sign({ data: 'bar', exp: Math.floor(Date.now() / 1000) + (15 * 15) }, privateKey, { algorithm: 'RS256'});
+      var publicKey = readFileSync('./public.key');  // get public key
+      verify(token, publicKey, { algorithms: ['RS256']}, (err, decoded) => {
+        salida = {decod: decoded, token: token, errr: err}
+      });
+      controlResponserutas(base64.encode(JSON.stringify({data: 'ok'})))
+      response.json(salida)
     }
 
 }

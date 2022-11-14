@@ -16,8 +16,13 @@ export default function Usuario({ setLoad }) {
     useEffect(() => {
         async function aux() {
             setLoad(true)
-            let { data } = await select('index', 1);
-            setUsers(data)
+            try {
+                let { data } = await select('index', 1);
+                setUsers(data)
+            } catch (error) {
+                setLoad(false)
+            }
+
             setTimeout(() => {
                 window.dataTable()
             }, 300)
