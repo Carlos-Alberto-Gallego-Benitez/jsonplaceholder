@@ -28,7 +28,6 @@ export default function Loyout({ path }) {
 
     //función para buscar usuarios
     const buscarUser = (e) => {
-        console.log(searchG)
         if (searchG) {
             if (searchG !== null && searchG !== '' && searchG !== undefined) {
                 navigate(`/search/${searchG}`)

@@ -59,7 +59,7 @@ export default function Fotos({ setLoad }) {
             "encode"
         ];
         let tamanocolumns = [25, 7, 9, 24, 15, 55];
-        exportDatos("Reporte_Publicaciones", 3, columnsName, columnsFilter, arrayData, tamanocolumns)
+        exportDatos("Reporte_Fotos", 3, columnsName, columnsFilter, arrayData, tamanocolumns)
         setLoad(false)
     }
 
@@ -70,7 +70,7 @@ export default function Fotos({ setLoad }) {
                 <div className='flex-excel'>
                     <IconButton className='excel' title='Reporte excel' onClick={() => { expoDatos() }} />
                 </div>
-                <div className="card mt-3">
+                <div className="card mt-3 scroll-card mb-3">
                     <div className="card-header">
                         <i className="fas fa-table mr-1"></i>
                         Listado de fotos

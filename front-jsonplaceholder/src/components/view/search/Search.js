@@ -12,8 +12,6 @@ export default function Search({ setLoad }) {
 
     const { id } = useParams();
 
-    console.log(id)
-
     //estado principal que almacena los usuarios a listar
     const [users, setUsers] = useState([])
 
@@ -74,7 +72,7 @@ export default function Search({ setLoad }) {
                 <div className='flex-excel'>
                     <IconButton className='excel' title='Reporte excel' onClick={() => { expoDatos() }} />
                 </div>
-                <div className="card mt-3">
+                <div className="card mt-3 scroll-card mb-3">
                     <div className="card-header">
                         <i className="fas fa-table mr-1"></i>
                         Listado de Búsqueda
