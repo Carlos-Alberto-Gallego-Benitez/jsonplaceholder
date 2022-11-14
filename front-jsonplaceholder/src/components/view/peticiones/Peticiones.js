@@ -194,7 +194,10 @@ export default function Peticiones({ setLoad }) {
                                                         <td className='flx'><IconButton title='Editar Petición' onClick={() => {
                                                             editar(e.id)
                                                             handleShow()
-                                                        }} className='icon-editar' /><IconButton className='icon-eliminar' title='Eliminar Petición' onClick={() => { eliminar() }} /></td>
+                                                        }} className='icon-editar' /><IconButton className='icon-eliminar' title='Eliminar Petición' onClick={() => {
+                                                            eliminar()
+                                                            elementConsulta.id = e.id
+                                                        }} /></td>
                                                     </tr>
                                                 </>
                                             )

@@ -2,7 +2,7 @@
 
 ## enlazada con una base de datos MySQL
 
-## en este mismo repositorio se encuentra el script de la bd
+## en este mismo repositorio se encuentra el script de la bd con el nombre de `jsonplaceholder.sql`
 
 ## Si no cuenta con cliente MySQL debajo adjunto link de descarga
 
